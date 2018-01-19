@@ -1,51 +1,34 @@
 <template>
   <div class="report-container">
-    <!--<div style="width:100%">
-      Comment
-    </div>-->
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td>Applications</td>
-            <td>IT Components</td>
-            <td>Data Objects</td>
-            <td>Business Capabilities</td>
-            <td>Projects</td>
-            <td>Provider</td>
-            <td>Processes</td>
-            <td>Interfaces</td>
-            <td>Other</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(factsheet, idx) in factsheets" :key="idx">
-            <td>{{factsheet.name}}</td>
-            <td>{{factsheet.numberOfApplications}}</td>
-            <td>{{factsheet.numberOfITComponents}}</td>
-            <td>{{factsheet.numberOfDataObjects}}</td>
-            <td>{{factsheet.numberOfBusinessCapabilities}}</td>
-            <td>{{factsheet.numberOfProjects}}</td>
-            <td>{{factsheet.numberOfProviders}}</td>
-            <td>{{factsheet.numberOfProcesses}}</td>
-            <td>{{factsheet.numberOfInterfaces}}</td>
-            <td>{{factsheet.numberOfOtherFactSheets}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <first-view v-if="view === 'view1'" :factsheets="factsheets" :columns="columns" />
+    <second-view v-else />
   </div>
 </template>
 
 <script>
 import '@leanix/reporting'
+import FirstView from './components/FirstView'
+import SecondView from './components/SecondView'
 import graphql from './graphql'
 
 export default {
+  components: { FirstView, SecondView },
   data () {
     return {
-      factsheets: []
+      view: 'view2',
+      factsheets: [],
+      columns: [
+        { name: 'Name', key: 'name' },
+        { name: 'Applications', key: 'numberOfApplications' },
+        { name: 'IT Components', key: 'numberOfITComponents' },
+        { name: 'Data Objects', key: 'numberOfDataObjects' },
+        { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
+        { name: 'Projects', key: 'numberOfProjects' },
+        { name: 'Provider', key: 'numberOfProviders' },
+        { name: 'Processes', key: 'numberOfProcesses' },
+        { name: 'Interfaces', key: 'numberOfInterfaces' },
+        { name: 'Other', key: 'numberOfOtherFactSheets' }
+      ]
     }
   },
   methods: {
@@ -97,6 +80,10 @@ export default {
         lx.ready({})
         this.fetchAllFactsheets()
       })
+    setInterval(() => {
+      this.view = this.view === 'view1' ? 'view2' : 'view1'
+      console.log('Changing! ', this.view)
+    }, 5000)
   }
 }
 </script>
