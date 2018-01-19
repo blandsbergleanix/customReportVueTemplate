@@ -1,5 +1,9 @@
 <template>
   <div class="report-container">
+    <div>
+      <button v-on:click="view = 'view1'">v1 </button>
+      <button v-on:click="view = 'view2'">v2</button>
+    </div>
     <first-view v-if="view === 'view1'" :factsheets="factsheets" :columns="columns" />
     <second-view v-else />
   </div>
@@ -15,7 +19,7 @@ export default {
   components: { FirstView, SecondView },
   data () {
     return {
-      view: 'view2',
+      view: 'view1',
       factsheets: [],
       columns: [
         { name: 'Name', key: 'name' },
@@ -77,13 +81,22 @@ export default {
     lx.init()
       .then(setup => {
         this.setup = setup
-        lx.ready({})
+        lx.ready({
+          facets: [
+            {
+              fixedFactSheetType: 'Application',
+              attributes: ['id', 'name'],
+              callback: (filteredFactSheets) => {
+                console.log(filteredFactSheets);
+                // avg = calc(filteredFactSheets)
+                // this.factsheets = filteredFactSheets.filter(fs => fs.??? > avg)
+                this.factsheets = filteredFactSheets;
+              }
+            }
+          ]
+        })
         this.fetchAllFactsheets()
       })
-    setInterval(() => {
-      this.view = this.view === 'view1' ? 'view2' : 'view1'
-      console.log('Changing! ', this.view)
-    }, 5000)
   }
 }
 </script>
