@@ -10,13 +10,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(factsheet, idx) in factsheets" :key="idx">
+        <tr v-for="(row, idx) in tableRows" :key="idx">
          <!-- <td v-for="(key, idx) in columns.map(column => column.key)" :key="idx">
             {{factsheet[key]}}
           </td>-->
           <td v-for="(column, idx) in columns" :key="idx">
             <!--{{factsheet[column[key]]}}-->
-            {{factsheet[column.key]}}
+            {{row[column.key]}}
           </td>
         </tr>
       </tbody>
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     factSheetCount () {
-      return this.factsheets.length
+      return this.factsheets.length;
     },
     tableRows () {
       const factSheetTypes = [
@@ -52,15 +52,21 @@ export default {
         'Processes',
         'Interfaces',
         'OtherFactSheets'
-      ]
+      ];
       return factSheetTypes.map(type => this.factsheets
-        .reduce((row, factsheet) => {
-          if (!row.type) row.type = type
-          row.current += factsheet[`numberOf${type}`],
-          row.thirty += factsheet[`numberOf${type}Minus30`],
-          row.ninety += factsheet[`numberOf${type}Minus90`]
-          return row
-        }, {current: 0, thirty: 0, ninety: 0}))
+          .reduce((row, factsheet) => {
+            if (!row.type) {
+              row.type = type
+              // why ???
+              console.log(row.type)
+            }
+
+            row.current += factsheet[`numberOf${type}`],
+            row.thirty += factsheet[`numberOf${type}Minus30`],
+            row.ninety += factsheet[`numberOf${type}Minus90`]
+            return row
+          }, {current: 0, thirty: 0, ninety: 0})
+        );
     }
   }
 }
