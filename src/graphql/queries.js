@@ -30,8 +30,8 @@ export default {
             numberOfInterfacesMinus30
             numberOfInterfacesMinus90
             numberOfOtherFactSheets
-            numberOfDataObjectsMinus30
-            numberOfDataObjectsMinus90
+            numberOfOtherFactSheetsMinus30
+            numberOfOtherFactSheetsMinus90
             numberOfUniqueUsersLast30Days
         }
         }
