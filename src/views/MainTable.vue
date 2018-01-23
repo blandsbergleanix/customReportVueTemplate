@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(factsheet, idx) in factsheets" :key="idx">
+        <tr class="clickable" v-for="(factsheet, idx) in factsheets" :key="idx" @click="customerSelected(factsheet)">
          <!-- <td v-for="(key, idx) in columns.map(column => column.key)" :key="idx">
             {{factsheet[key]}}
           </td>-->
@@ -42,6 +42,21 @@ export default {
         { name: 'Unique User', key: 'numberOfUniqueUsersLast30Days' }
       ]
     }
+  },
+  methods: {
+    customerSelected (factsheet) {
+      console.log('CUSTOMER SELECTED FROM MAIN TABLE!', factsheet.name)
+      this.$emit('customerselected', factsheet)
+    }
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.clickable
+  cursor pointer
+
+.table-header
+  background red
+  color white
+</style>
