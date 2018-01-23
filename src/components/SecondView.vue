@@ -57,15 +57,13 @@ export default {
           .reduce((row, factsheet) => {
             if (!row.type) {
               row.type = type
-              // why ???
-              console.log(row.type)
             }
 
             row.current += factsheet[`numberOf${type}`],
             row.thirty += factsheet[`numberOf${type}Minus30`],
             row.ninety += factsheet[`numberOf${type}Minus90`]
             return row
-          }, {current: 0, thirty: 0, ninety: 0})
+          }, { current: 0, thirty: 0, ninety: 0})
         );
     }
   }

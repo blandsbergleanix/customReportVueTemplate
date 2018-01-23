@@ -175,6 +175,8 @@ export default {
     background white 
     color black
     padding 16px
+    width 1000px
+    overflow-wrap: normal;
   
   .item
     background white
