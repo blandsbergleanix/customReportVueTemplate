@@ -53,18 +53,19 @@ export default {
         'Interfaces',
         'OtherFactSheets'
       ];
+
       return factSheetTypes.map(type => this.factsheets
           .reduce((row, factsheet) => {
             if (!row.type) {
               row.type = type
             }
 
-            row.current += factsheet[`numberOf${type}`],
-            row.thirty += factsheet[`numberOf${type}Minus30`],
-            row.ninety += factsheet[`numberOf${type}Minus90`]
+            row.current += factsheet[`numberOf${type}`] ? factsheet[`numberOf${type}`] : 0,
+            row.thirty += factsheet[`numberOf${type}Minus30`] ? factsheet[`numberOf${type}Minus30`] : 0 ,
+            row.ninety += factsheet[`numberOf${type}Minus90`] ? factsheet[`numberOf${type}Minus90`] : 0
             return row
           }, { current: 0, thirty: 0, ninety: 0})
-        );
+        )
     }
   }
 }

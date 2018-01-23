@@ -1,6 +1,6 @@
 <template>
   <div>
-    First view
+    Details
     <table>
       <thead>
         <tr>
