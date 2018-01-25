@@ -16,6 +16,7 @@ import MainTable from './views/MainTable.vue'
 import FactsheetOverview from './views/FactsheetOverview'
 import DetailedView from './views/DetailedView'
 import graphql from './graphql'
+import * as attributes from './attributes'
 
 export default {
   components: { MainTable, FactsheetOverview, DetailedView },
@@ -28,12 +29,11 @@ export default {
   },
   methods: {
     onCustomerSelection (factsheet) {
-      console.log('FROM APP VIEW, customer selected!', factsheet)
       this.selectedFactsheet = factsheet
       this.view = 'view3'
     },
     onBackEvent () {
-      console.log('Hello')
+      this.view = 'view1'
     },
     fetchAllFactsheets () {
       const query = graphql.queries.FETCH_FACTSHEETS
@@ -67,44 +67,15 @@ export default {
           facets: [
             {
               fixedFactSheetType: 'Application',
-              attributes: [
-               'id',
-               'name', 
-               'numberOfApplications',
-               'numberOfApplicationsMinus30',
-               'numberOfApplicationsMinus90',
-               'numberOfDataObjects',
-               'numberOfDataObjectsMinus30',
-               'numberOfDataObjectsMinus90',
-               'numberOfITComponents',
-               'numberOfITComponentsMinus30',
-               'numberOfITComponentsMinus90',
-               'numberOfBusinessCapabilities',
-               'numberOfBusinessCapabilitiesMinus30',
-               'numberOfBusinessCapabilitiesMinus90',
-               'numberOfProjects',
-               'numberOfProjectsMinus30',
-               'numberOfProjectsMinus90',
-               'numberOfProviders',
-               'numberOfProvidersMinus30',
-               'numberOfProvidersMinus90',
-               'numberOfProcesses',
-               'numberOfProcessesMinus30',
-               'numberOfProcessesMinus90',
-               'numberOfInterfaces',
-               'numberOfInterfacesMinus30',
-               'numberOfInterfacesMinus90',
-               'numberOfOtherFactSheets',
-               'numberOfOtherFactSheetsMinus30',
-               'numberOfOtherFactSheetsMinus90',
-               'numberOfDataObjectsMinus30',
-               'numberOfDataObjectsMinus90',
-               'numberOfUniqueUsersLast30Days'
-               ],
+              attributes: attributes.fsAttributes.concat(attributes.calcAttributes),
               callback: (filteredFactSheets) => {
-                // avg = calc(filteredFactSheets)
-                // this.factsheets = filteredFactSheets.filter(fs => fs.??? > avg)
                 this.factsheets = filteredFactSheets;
+                this.aggregations = { avg: {} };
+                attributes.calcAttributes.forEach(a => {
+                  let sum = 0;
+                  this.factsheets.forEach(fs => sum += fs[a])
+                  this.aggregations.avg[a] = Math.round(sum / this.factsheets.length)
+                })
               }
             }
           ]
@@ -116,14 +87,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .report-container
+  .report-container 
     background white 
     color black
     padding 16px
     width 1000px
     overflow-wrap normal
     border 1px solid black
-  
+
   .item
     background white
     color white

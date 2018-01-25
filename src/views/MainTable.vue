@@ -1,20 +1,15 @@
 <template>
   <div>
     Details
-    <table>
+    <table border = "1">
       <thead>
         <tr>
-          <!--<td v-for="(columnName, idx) in columns.map(column => column.name)" :key="idx">{{columnName}}</td>-->
           <td v-for="(column, idx) in columns" :key="idx">{{column.name}}</td>
         </tr>
       </thead>
       <tbody>
         <tr class="clickable" v-for="(factsheet, idx) in factsheets" :key="idx" @click="customerSelected(factsheet)">
-         <!-- <td v-for="(key, idx) in columns.map(column => column.key)" :key="idx">
-            {{factsheet[key]}}
-          </td>-->
           <td v-for="(column, idx) in columns" :key="idx">
-            <!--{{factsheet[column[key]]}}-->
             {{factsheet[column.key]}}
           </td>
         </tr>
@@ -45,7 +40,6 @@ export default {
   },
   methods: {
     customerSelected (factsheet) {
-      console.log('CUSTOMER SELECTED FROM MAIN TABLE!', factsheet.name)
       this.$emit('customerselected', factsheet)
     }
   }
@@ -59,4 +53,27 @@ export default {
 .table-header
   background red
   color white
+
+table {
+  overflow: hidden;
+}
+
+tr:hover {
+  background-color: #ffa;
+}
+
+td, th {
+  position: relative;
+}
+td:hover::after,
+th:hover::after {
+  content: "";
+  position: absolute;
+  background-color: #ffa;
+  left: 0;
+  top: -5000px;
+  height: 10000px;
+  width: 100%;
+  z-index: -1;
+}
 </style>
