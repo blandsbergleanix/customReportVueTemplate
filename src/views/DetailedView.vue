@@ -1,7 +1,6 @@
 <template>
    <div>
-       Detail View
-       <button @click="$emit('back')">General</button>
+       <button @click="$emit('back')">Back</button>
         <table border = "1">
         <thead>
             <tr>

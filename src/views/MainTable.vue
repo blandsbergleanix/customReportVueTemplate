@@ -1,6 +1,5 @@
 <template>
   <div>
-    Details
     <table border = "1">
       <thead>
         <tr>
@@ -31,6 +30,7 @@ export default {
         { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
         { name: 'Projects', key: 'numberOfProjects' },
         { name: 'Provider', key: 'numberOfProviders' },
+        {name: 'UserGroups', key: 'numberOfUserGroups'},
         { name: 'Processes', key: 'numberOfProcesses' },
         { name: 'Interfaces', key: 'numberOfInterfaces' },
         { name: 'Other', key: 'numberOfOtherFactSheets' },

@@ -1,8 +1,8 @@
 <template>
   <div class="report-container">
     <div v-if="['view1', 'view2'].indexOf(view) > -1">
-      <button @click="view = 'view1'">Details </button>
-      <button @click="view = 'view2'">General</button>      
+      <button @click="view = 'view1'">Customer </button>
+      <button @click="view = 'view2'">Fact Sheet Overview</button>      
     </div>
     <main-table v-if="view === 'view1'" :factsheets="factsheets" @customerselected="onCustomerSelection" />
     <factsheet-overview v-if="view === 'view2'" :factsheets="factsheets"/>
@@ -71,11 +71,12 @@ export default {
               callback: (filteredFactSheets) => {
                 this.factsheets = filteredFactSheets;
                 this.aggregations = { avg: {} };
-                attributes.calcAttributes.forEach(a => {
+                attributes.calcAttributes.forEach(attrbt => {
                   let sum = 0;
-                  this.factsheets.forEach(fs => sum += fs[a])
-                  this.aggregations.avg[a] = Math.round(sum / this.factsheets.length)
+                  this.factsheets.forEach(fs => sum += fs[attrbt])
+                  this.aggregations.avg[attrbt] = Math.round(sum / this.factsheets.length)
                 })
+                console.log(this.aggregations)
               }
             }
           ]

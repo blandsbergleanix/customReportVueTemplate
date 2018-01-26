@@ -1,21 +1,14 @@
 <template>
   <div>
-    Second view
-    <!-- Factsheet count is {{tableRows}}-->
-    <table>
+    <table border = "1"> 
       <thead>
         <tr>
-          <!--<td v-for="(columnName, idx) in columns.map(column => column.name)" :key="idx">{{columnName}}</td>-->
           <td v-for="(column, idx) in columns" :key="idx">{{column.name}}</td>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(row, idx) in tableRows" :key="idx">
-         <!-- <td v-for="(key, idx) in columns.map(column => column.key)" :key="idx">
-            {{factsheet[key]}}
-          </td>-->
           <td v-for="(column, idx) in columns" :key="idx">
-            <!--{{factsheet[column[key]]}}-->
             {{row[column.key]}}
           </td>
         </tr>
@@ -49,6 +42,7 @@ export default {
         'BusinessCapabilities',
         'Projects',
         'Providers',
+        'UserGroups',
         'Processes',
         'Interfaces',
         'OtherFactSheets'
