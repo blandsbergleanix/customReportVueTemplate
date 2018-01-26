@@ -74,20 +74,24 @@ export default {
       
                 this.aggregations = { avg: {} };
 
-                this.factsheets.reduce((avg, factsheet) => {
-                  const attr 
-                }, {})
-                attributes.calcAttributes.forEach(attrbt => {
-                  const attr = attrbt
-                  let sum = 0;
-                  this.factsheets.forEach(fs => {
-                    if (attr === 'numberOfApplications') console.log('ATTR numberOfApplications', attr)
-                    sum += fs[attrbt]
+                const aggregation = filteredFactSheets.reduce((accu, factsheet, idx) => {
+                  const type = factsheet.type
+                  if (!accu[type]) accu[type] = { sum: {}, avg: {}}
+                  const keys = Object.keys(factsheet)
+                  const numberKeys = keys.filter(key => !isNaN(factsheet[key]))
+                  numberKeys.map(key => {
+                    if (!accu[type]['sum'][key]) accu[type]['sum'][key] = 0
+                    accu[type]['sum'][key] += factsheet[key]
                   })
-                  this.aggregations.avg[attrbt] = Math.round(sum / this.factsheets.length);
-                  this.factsheets = filteredFactSheets;
-                })
-                console.log('AGGREG', this.aggregations)
+                  if (idx + 1 === filteredFactSheets.length) {
+                    console.log('last item, time to compute average', Object.keys(accu[type].sum))
+                     accu[type]['avg'] = Object.keys(accu[type].sum).reduce((avgAccu, key) => {
+                      avgAccu[key] = accu[type]['sum'][key] / idx + 1
+                      return avgAccu
+                    }, {})
+                  }
+                  return accu
+                }, {})
               }
             }
           ]

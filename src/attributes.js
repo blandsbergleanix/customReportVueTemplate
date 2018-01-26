@@ -1,4 +1,4 @@
-export const fsAttributes = ['id', 'name', 'edition']
+export const fsAttributes = ['id', 'name', 'edition', 'type']
 export const calcAttributes = [
   'numberOfApplications',
   'numberOfApplicationsMinus30',
