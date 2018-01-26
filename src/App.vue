@@ -17,6 +17,7 @@ import FactsheetOverview from './views/FactsheetOverview'
 import DetailedView from './views/DetailedView'
 import graphql from './graphql'
 import * as attributes from './attributes'
+import { fsAttributes } from './attributes';
 
 export default {
   components: { MainTable, FactsheetOverview, DetailedView },
@@ -69,14 +70,24 @@ export default {
               fixedFactSheetType: 'Application',
               attributes: attributes.fsAttributes.concat(attributes.calcAttributes),
               callback: (filteredFactSheets) => {
-                this.factsheets = filteredFactSheets;
+                // console.log('FILTERED FACTSHEETS', filteredFactSheets)
+      
                 this.aggregations = { avg: {} };
+
+                this.factsheets.reduce((avg, factsheet) => {
+                  const attr 
+                }, {})
                 attributes.calcAttributes.forEach(attrbt => {
+                  const attr = attrbt
                   let sum = 0;
-                  this.factsheets.forEach(fs => sum += fs[attrbt])
-                  this.aggregations.avg[attrbt] = Math.round(sum / this.factsheets.length)
+                  this.factsheets.forEach(fs => {
+                    if (attr === 'numberOfApplications') console.log('ATTR numberOfApplications', attr)
+                    sum += fs[attrbt]
+                  })
+                  this.aggregations.avg[attrbt] = Math.round(sum / this.factsheets.length);
+                  this.factsheets = filteredFactSheets;
                 })
-                console.log(this.aggregations)
+                console.log('AGGREG', this.aggregations)
               }
             }
           ]

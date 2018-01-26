@@ -58,7 +58,7 @@ export default {
             row.thirty += factsheet[`numberOf${type}Minus30`] ? factsheet[`numberOf${type}Minus30`] : 0 ,
             row.ninety += factsheet[`numberOf${type}Minus90`] ? factsheet[`numberOf${type}Minus90`] : 0
             return row
-          }, { current: 0, thirty: 0, ninety: 0})
+          }, { current: 0, thirty: 0, ninety: 0 })
         )
     }
   }

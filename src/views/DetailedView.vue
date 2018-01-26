@@ -18,6 +18,9 @@
             </tr>
         </tbody>
         </table>
+        <div style="margin: 0 2rem; padding: 2rem 0">
+            <div>Average of some quantity: ...</div>
+        </div>
    </div>
 </template>
 
@@ -43,11 +46,13 @@ export default {
             rows: [
                 { name: 'Current', suffix: '' },
                 { name: 'Minus30', suffix: 'Minus30' },
-                { name: 'Minus90', suffix: 'Minus90' },
-                { name: 'Average', suffix: 'Minus90' },
+                { name: 'Minus90', suffix: 'Minus90' }
             ]
         }
     },
+    mounted () {
+        console.log(this.customer)
+    }
 }
 
 
