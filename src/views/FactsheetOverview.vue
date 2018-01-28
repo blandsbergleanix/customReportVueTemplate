@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  props: ['factsheets'],
+  props: ['factsheets', 'aggregations'],
   data () {
     return {      
       columns: [

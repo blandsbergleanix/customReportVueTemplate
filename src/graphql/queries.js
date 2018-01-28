@@ -5,6 +5,7 @@ export default {
         node {
           name
           ... on Application {
+            edition
             numberOfApplications
             numberOfApplicationsMinus30
             numberOfApplicationsMinus90

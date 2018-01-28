@@ -12,22 +12,25 @@
         <tbody>
             <tr v-for="(row, idx) in rows" :key="idx">
                 <td v-for="(column, idx) in columns" :key="idx">
-                 <p v-if="idx !== 0"> {{ customer[column.key + row.suffix] }}</p>
-                <p v-else>{{row.name}}</p>
+                    <p v-if="idx !== 0"> {{ customer[column.key + row.suffix] }}</p>
+                    <p v-else>{{row.name}}</p>
+                </td>
+            </tr>
+            <tr v-for="(row, idx) in rows" :key="idx">
+                <td v-for="(column, idx) in columnsAverage" :key="idx">
+                    <p v-if="idx !== 0"> {{ editionAverage['Application']['avg'][column.key + row.suffix]}} </p>
+                    <p v-else>{{row.name}}</p>
                 </td>
             </tr>
         </tbody>
         </table>
-        <div style="margin: 0 2rem; padding: 2rem 0">
-            <div>Average of some quantity: ...</div>
-        </div>
    </div>
 </template>
 
 <script>
 export default {
     name: 'detailed-view',
-    props: ['customer'],
+    props: ['customer',  'editionAverage'],
     data () {
         return {
             columns: [
@@ -47,11 +50,24 @@ export default {
                 { name: 'Current', suffix: '' },
                 { name: 'Minus30', suffix: 'Minus30' },
                 { name: 'Minus90', suffix: 'Minus90' }
+            ],
+            columnsAverage: [
+                { name: 'Name', key: 'name' },
+                { name: 'Applications', key: 'numberOfApplications' },
+                { name: 'IT Components', key: 'numberOfITComponents' },
+                { name: 'Data Objects', key: 'numberOfDataObjects' },
+                { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
+                { name: 'Projects', key: 'numberOfProjects' },
+                { name: 'Provider', key: 'numberOfProviders' },
+                { name: 'Processes', key: 'numberOfProcesses' },
+                { name: 'Interfaces', key: 'numberOfInterfaces' },
+                { name: 'Other', key: 'numberOfOtherFactSheets' },
+                { name: 'Unique User', key: 'numberOfUniqueUsersLast30Days' }
             ]
         }
     },
     mounted () {
-        console.log(this.customer)
+        console.log()
     }
 }
 
