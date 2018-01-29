@@ -48,6 +48,7 @@ export default {
       allEditons.forEach(edition => {
         const filtered = this.allFactsheets.filter((fact) => fact['edition']==edition)
         this.allStatistics.set(edition, this.calculateAverage(filtered))
+        console.log(this.allStatistics)
       })        
     },
     calculateAverage (factsheets) {
@@ -62,7 +63,7 @@ export default {
                   })
                   if (idx + 1 === factsheets.length) {
                      accu[type]['avg'] = Object.keys(accu[type].sum).reduce((avgAccu, key) => {
-                      avgAccu[key] = accu[type]['sum'][key] / idx + 1
+                      avgAccu[key] = Math.round(accu[type]['sum'][key] / idx + 1)
                       return avgAccu
                     }, {})
                   }

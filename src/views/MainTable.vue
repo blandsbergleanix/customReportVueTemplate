@@ -50,6 +50,12 @@ export default {
 .clickable
   cursor pointer
 
+.aboveAverageInEdition
+  color green
+
+.belowAverageInEdition
+  color red
+
 .table-header
   background red
   color white
