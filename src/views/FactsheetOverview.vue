@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table border = "1"> 
+    <table > 
       <thead>
         <tr>
           <td v-for="(column, idx) in columns" :key="idx">{{column.name}}</td>
@@ -64,35 +64,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus" scoped>
-.clickable
-  cursor pointer
-
-.table-header
-  background red
-  color white
-
-table {
-  overflow: hidden;
-}
-
-tr:hover {
-  background-color: #ffa;
-}
-
-td, th {
-  position: relative;
-}
-td:hover::after,
-th:hover::after {
-  content: "";
-  position: absolute;
-  background-color: #ffa;
-  left: 0;
-  top: -5000px;
-  height: 10000px;
-  width: 100%;
-  z-index: -1;
-}
-</style>

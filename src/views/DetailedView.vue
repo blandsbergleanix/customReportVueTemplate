@@ -1,7 +1,7 @@
 <template>
    <div>
        <button @click="$emit('back')">Back</button>
-        <table border = "1">
+        <table >
         <thead>
             <tr>
                 <td v-for="(column, idx) in columns" :key="idx">
@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(row, idx) in rows" :key="idx">
+            <tr v-for="(row, idx) in rows" :key="`row_${idx}`">
                 <td v-for="(column, idx) in columns" :key="idx">
                     <p v-if="idx !== 0"> {{ customer[column.key + row.suffix] }}</p>
                     <p v-else>{{row.name}}</p>
@@ -79,37 +79,3 @@ export default {
 
 
 </script>
-
-<style lang="stylus" scoped>
-  button {font-size: 24px; color: white; background-color: #009fdf; border: 2px solid #009fdf;}
-  button:hover
-    background-color #ccc
-    color black
-
-.table-header
-  background red
-  color white
-
-table {
-  overflow: hidden;
-}
-
-tr:hover {
-  background-color: #ffa;
-}
-
-td, th {
-  position: relative;
-}
-td:hover::after,
-th:hover::after {
-  content: "";
-  position: absolute;
-  background-color: #ffa;
-  left: 0;
-  top: -5000px;
-  height: 10000px;
-  width: 100%;
-  z-index: -1;
-}
-</style>

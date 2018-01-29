@@ -118,14 +118,28 @@ export default {
 }
 </script>
 
+<style lang="stylus">
+  table
+    border-collapse collapse
+    width 100%
+
+  th, td
+    padding 8px
+    text-align left
+    border-bottom 1px solid #ddd
+
+  tr:hover
+    background-color #f5f5f5
+    cursor pointer
+
+</style>
+
 <style lang="stylus" scoped>
-  .report-container 
-    background white 
+  .report-container
+    width 100% !important
     color black
-    padding 16px
-    width 1000px
-    overflow-wrap normal
-    border 1px solid black
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif
+    font-size: 12px;
 
   .item
     background white
@@ -133,7 +147,7 @@ export default {
     margin 8px
     padding 8px
 
-  button {font-size: 24px; color: white; background-color: #009fdf; border: 2px solid #009fdf;}
+  button {font-size: 1.5rem; color: white; background-color: #009fdf; border: 2px solid #009fdf;}
   button:hover
     background-color #ccc
     color black
