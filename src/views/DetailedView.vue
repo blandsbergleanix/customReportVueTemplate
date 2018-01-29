@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <td v-for="(column, idx) in columns" :key="idx">
-                    <p v-if="idx !== 0"> {{column.name}}</p>
+                <p v-if="idx !== 0"> {{column.name}}</p>
                 <p v-else>{{customer.name}}</p></td>
             </tr>
         </thead>
@@ -36,6 +36,7 @@ export default {
             columns: [
                 { name: 'Name', key: 'name' },
                 { name: 'Applications', key: 'numberOfApplications' },
+                { name: 'DataObjects', key: 'numberOfDataObjects' },
                 { name: 'IT Components', key: 'numberOfITComponents' },
                 { name: 'Data Objects', key: 'numberOfDataObjects' },
                 { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
