@@ -62,7 +62,7 @@ export default {
                   })
                   if (idx + 1 === factsheets.length) {
                      accu[type]['avg'] = Object.keys(accu[type].sum).reduce((avgAccu, key) => {
-                      avgAccu[key] = Math.round(accu[type]['sum'][key] / idx + 1)
+                      avgAccu[key] = Math.floor(accu[type]['sum'][key] / idx + 1)
                       return avgAccu
                     }, {})
                   }
@@ -76,18 +76,6 @@ export default {
           facetFilters: [
             { facetKey: 'FactSheetTypes', keys: ['Application'] },
             { facetKey: 'hierarchyLevel', keys: ['1'] },
-            {
-              "facetKey":"lifecycle",
-              "operator":"OR",
-              "keys":["plan","phaseIn","active","phaseOut"],
-              "dateFilter":{
-                "from":"2018-01-17",
-                "to":"2018-01-17",
-                "type":"TODAY",
-                "minDate":"2013-06-01",
-                "maxDate":"2022-12-31"
-              }
-            }
           ]
         }
       }
@@ -131,6 +119,11 @@ export default {
     background-color #f5f5f5
     cursor pointer
 
+  button {font-size: 1.5rem; color: white; background-color: #009fdf; border: 2px solid #009fdf;}
+  button:hover
+    background-color #ccc
+    color black
+
 </style>
 
 <style lang="stylus" scoped>
@@ -138,16 +131,11 @@ export default {
     width 100% !important
     color black
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif
-    font-size: 12px;
+    font-size: 12px
 
   .item
     background white
     color white
     margin 8px
     padding 8px
-
-  button {font-size: 1.5rem; color: white; background-color: #009fdf; border: 2px solid #009fdf;}
-  button:hover
-    background-color #ccc
-    color black
 </style>

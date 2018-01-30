@@ -40,6 +40,7 @@ export default {
         'DataObjects',
         'ITComponents',
         'BusinessCapabilities',
+        'TechnologyStacks',
         'Projects',
         'Providers',
         'UserGroups',

@@ -6,7 +6,7 @@
             <tr>
                 <td v-for="(column, idx) in columns" :key="idx">
                 <p v-if="idx !== 0"> {{column.name}}</p>
-                <p v-else>{{customer.name}}</p></td>
+                <p v-else>{{customer.name}} ({{customer.edition}})</p></td>
             </tr>
         </thead>
         <tbody>
@@ -36,12 +36,13 @@ export default {
             columns: [
                 { name: 'Name', key: 'name' },
                 { name: 'Applications', key: 'numberOfApplications' },
+                { name: 'ITComponents', key: 'numberOfITComponents' },
                 { name: 'DataObjects', key: 'numberOfDataObjects' },
-                { name: 'IT Components', key: 'numberOfITComponents' },
-                { name: 'Data Objects', key: 'numberOfDataObjects' },
                 { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
+                { name: 'Technology Stack', key: 'numberOfTechnologyStacks' },
                 { name: 'Projects', key: 'numberOfProjects' },
                 { name: 'Provider', key: 'numberOfProviders' },
+                { name: 'User Groups', key: 'numberOfUserGroups' },
                 { name: 'Processes', key: 'numberOfProcesses' },
                 { name: 'Interfaces', key: 'numberOfInterfaces' },
                 { name: 'Other', key: 'numberOfOtherFactSheets' },
@@ -55,11 +56,13 @@ export default {
             columnsAverage: [
                 { name: 'Name', key: 'name' },
                 { name: 'Applications', key: 'numberOfApplications' },
-                { name: 'IT Components', key: 'numberOfITComponents' },
+                { name: 'ITComponents', key: 'numberOfITComponents' },
                 { name: 'Data Objects', key: 'numberOfDataObjects' },
                 { name: 'Business Capabilities', key: 'numberOfBusinessCapabilities' },
+                { name: 'Technology Stack', key: 'numberOfTechnologyStacks' },
                 { name: 'Projects', key: 'numberOfProjects' },
                 { name: 'Provider', key: 'numberOfProviders' },
+                { name: 'User Groups', key: 'numberOfUserGroups' },
                 { name: 'Processes', key: 'numberOfProcesses' },
                 { name: 'Interfaces', key: 'numberOfInterfaces' },
                 { name: 'Other', key: 'numberOfOtherFactSheets' },
