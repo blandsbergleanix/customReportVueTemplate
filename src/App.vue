@@ -48,7 +48,6 @@ export default {
       allEditons.forEach(edition => {
         const filtered = this.allFactsheets.filter((fact) => fact['edition']==edition)
         this.allStatistics.set(edition, this.calculateAverage(filtered))
-        console.log(this.allStatistics)
       })        
     },
     calculateAverage (factsheets) {

@@ -44,7 +44,6 @@ export default {
       this.$emit('customerselected', factsheet)
     },
     isAboveAverage (factsheet, column) {
-      console.log(this.allStatistics)
       const test = factsheet[column.key] > this.allStatistics.get(factsheet.edition)[factsheet.type].avg[column.key]
       return test
     },
