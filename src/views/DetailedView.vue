@@ -46,6 +46,7 @@ export default {
                 { name: 'Processes', key: 'numberOfProcesses' },
                 { name: 'Interfaces', key: 'numberOfInterfaces' },
                 { name: 'Other', key: 'numberOfOtherFactSheets' },
+                { name: 'Total Factsheet Count', key: 'numberOfTotalCount' },
                 { name: 'Unique User', key: 'numberOfUniqueUsersLast30Days' }
             ],
             rows: [
@@ -66,6 +67,7 @@ export default {
                 { name: 'Processes', key: 'numberOfProcesses' },
                 { name: 'Interfaces', key: 'numberOfInterfaces' },
                 { name: 'Other', key: 'numberOfOtherFactSheets' },
+                { name: 'Total Count', key: 'numberOfTotalCount' },
                 { name: 'Unique User', key: 'numberOfUniqueUsersLast30Days' }
             ],
             rowsAverage: [

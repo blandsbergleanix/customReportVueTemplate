@@ -31,10 +31,11 @@ export default {
         { name: 'Technology Stack', key: 'numberOfTechnologyStacks' },
         { name: 'Projects', key: 'numberOfProjects' },
         { name: 'Provider', key: 'numberOfProviders' },
-        {name: 'UserGroups', key: 'numberOfUserGroups'},
+        { name: 'UserGroups', key: 'numberOfUserGroups'},
         { name: 'Processes', key: 'numberOfProcesses' },
         { name: 'Interfaces', key: 'numberOfInterfaces' },
         { name: 'Other', key: 'numberOfOtherFactSheets' },
+        { name: 'Total Factsheet Count', key: 'numberOfTotalCount' },             
         { name: 'Unique User', key: 'numberOfUniqueUsersLast30Days' }
       ]
     }

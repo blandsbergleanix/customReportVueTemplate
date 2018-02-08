@@ -19,6 +19,8 @@ import graphql from './graphql'
 import * as attributes from './attributes'
 import { fsAttributes } from './attributes';
 
+var math = require('mathjs');
+
 export default {
   components: { MainTable, FactsheetOverview, DetailedView },
   data () {
@@ -28,7 +30,8 @@ export default {
       allFactsheets: null,
       allStatistics: new Map(),
       selectedFactsheet: {},
-      editionAverage: {}
+      editionAverage: {},
+      customer_FsCount: {}
     }
   },
   methods: {
@@ -37,34 +40,77 @@ export default {
       this.view = 'customerDetails'
       this.editionAverage = this.allStatistics.get(factsheet['edition'])
     },
+
     onBackEvent () {
       this.view = 'customerOverview'
+    },
+
+    calculateTotalFsCount () {
+      this.factsheets.forEach(
+        factsheet => {
+            factsheet["numberOfTotalCount"] = this.countNumberOfFactsheets(factsheet, "")
+            factsheet["numberOfTotalCountMinus30"] =  this.countNumberOfFactsheets(factsheet, "Minus30")
+            factsheet["numberOfTotalCountMinus90"] =  this.countNumberOfFactsheets(factsheet, "Minus90")
+        })    
+    },
+    countNumberOfFactsheets(factsheet, suffix){
+      return  factsheet["numberOfApplications" + suffix]+
+              factsheet["numberOfDataObjects" + suffix]+
+              factsheet["numberOfITComponents" + suffix]+
+              factsheet["numberOfBusinessCapabilities" + suffix]+
+              factsheet["numberOfTechnologyStacks" + suffix]+
+              factsheet["numberOfProjects" + suffix]+
+              factsheet["numberOfProviders" + suffix]+
+              factsheet["numberOfUserGroups" + suffix]+
+              factsheet["numberOfProcesses" + suffix]+
+              factsheet["numberOfInterfaces" + suffix]+
+              factsheet["numberOfOtherFactSheets" + suffix]
     },
     calculateAvgForAllEditions(){
       var avgByEdition = {}
 
       const allEditons = new Set(this.allFactsheets
-                                     .map(fact => fact.edition));
+                                     .map(fact => fact.edition))
       allEditons.forEach(edition => {
         const filtered = this.allFactsheets.filter((fact) => fact['edition']==edition)
         this.allStatistics.set(edition, this.calculateAverage(filtered))
-      })        
+      })
     },
     calculateAverage (factsheets) {
+      if (factsheets.length == 0)
+        return null
+      var firstSheet = factsheets[0]
+      var statstics = {}
+      statstics["edition"] = firstSheet.edition
+      Object.keys(firstSheet)
+            .filter(key => !isNaN(firstSheet[key]))
+            .forEach(key => {
+                var allValuesOfKey = new Array
+                factsheets.map(fact => fact[key])
+                          .forEach(value =>  allValuesOfKey.push(value))
+                statstics[key] = {}
+                statstics[key]["standard deviation"] = math.std(allValuesOfKey)
+                statstics[key]["sum"] = math.sum(allValuesOfKey)
+                statstics[key]["avg"] = math.mean(allValuesOfKey)
+      })
+      console.log(statstics)
       return factsheets.reduce((accu, factsheet, idx) => {
                   const type = factsheet.type
-                  if (!accu[type]) accu[type] = { sum: {}, avg: {}}
+                  if (!accu[type]) 
+                       accu[type] = { sum: {}, avg: {}}
                   const keys = Object.keys(factsheet)
                   const numberKeys = keys.filter(key => !isNaN(factsheet[key]))
                   numberKeys.map(key => {
-                    if (!accu[type]['sum'][key]) accu[type]['sum'][key] = 0
+                    if (!accu[type]['sum'][key]) 
+                         accu[type]['sum'][key] = 0
                     accu[type]['sum'][key] += factsheet[key]
                   })
                   if (idx + 1 === factsheets.length) {
-                     accu[type]['avg'] = Object.keys(accu[type].sum).reduce((avgAccu, key) => {
-                      avgAccu[key] = Math.floor(accu[type]['sum'][key] / idx + 1)
-                      return avgAccu
-                    }, {})
+                     accu[type]['avg'] = Object.keys(accu[type].sum).reduce(
+                       (avgAccu, key) => {
+                          avgAccu[key] = Math.floor(accu[type]['sum'][key] / factsheets.length)
+                        return avgAccu
+                        }, {})
                   }
                   return accu
                 }, {})
@@ -90,12 +136,13 @@ export default {
             {
               fixedFactSheetType: 'Application',
               attributes: attributes.fsAttributes.concat(attributes.calcAttributes), callback: (filteredFactSheets) => {
-                if (this.allFactsheets === null) {
+                if (this.allFactsheets === null) {                  
                   this.allFactsheets = filteredFactSheets
                   this.calculateAvgForAllEditions()
                 }
                 this.factsheets = filteredFactSheets
                 this.aggregations = Object.assign({}, this.calculateAverage(filteredFactSheets))
+                this.calculateTotalFsCount()                
               }
             }
           ]
