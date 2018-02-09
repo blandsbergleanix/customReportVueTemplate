@@ -1,13 +1,13 @@
 {
-  "name": "custom-data-quality-report",
+  "name": "customerOverview",
   "version": "1.0.0",
-  "description": "This report shows the overall quality of your Application Fact Sheets",
+  "description": "Displays aggregated customer data",
   "engines": {
     "node": ">=8.5.0"
   },
   "leanixReport": {
-    "id": "net.leanix.pmrs.customDataQualityReport",
-    "title": "Intermediate Project",
+    "id": "net.leanix.bl.customerFactsheetOverview",
+    "title": "Customer Factsheet Overview",
     "defaultConfig": {}
   },
   "scripts": {
@@ -19,7 +19,7 @@
     "leanix",
     "custom-report"
   ],
-  "author": "PBernhard Landsberg",
+  "author": "Bernhard Landsberg",
   "private": true,
   "license": "UNLICENSED",
   "devDependencies": {
